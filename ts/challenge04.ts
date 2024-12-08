@@ -97,3 +97,7 @@ function main() {
 }
 
 main();
+
+// r = rows
+// c = columns
+// O(r * c²)
