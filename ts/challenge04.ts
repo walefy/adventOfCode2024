@@ -6,11 +6,10 @@ function formatMatrix(baseString: string) {
 }
 
 function countXmasHorizontal(index: number, row: string[]): number {
-  const stringRow = row;
   let xmasCount = 0;
 
-  const leftXmas = stringRow.slice(index - XMAS.length + 1, index + 1);
-  const rightXmas = stringRow.slice(index, index + XMAS.length);
+  const leftXmas = row.slice(index - XMAS.length + 1, index + 1);
+  const rightXmas = row.slice(index, index + XMAS.length);
 
   if (leftXmas.join('') === REVERSE_XMAS) {
     xmasCount++;
