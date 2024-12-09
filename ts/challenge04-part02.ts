@@ -1,7 +1,7 @@
 const MAS = 'MAS';
-const RMAS = 'SAM';
+const REVERSE_MAS = 'SAM';
 
-const isMas = (text: string) => text === MAS || text === RMAS;
+const isMas = (text: string) => text === MAS || text === REVERSE_MAS;
 
 function formatMatrix(baseString: string) {
   return baseString.split('\n').map((row) => row.split(''));
