@@ -1,17 +1,22 @@
 const input = Deno.readTextFileSync('inputs/input05.txt');
 
-type Role = {
-  first: string;
-  last: string;
-};
-
 const [roles, pages] = input.split('\n\n');
 
-const rolesFormatted: Role[] = roles.split('\n').map((value) => {
-  const [first, last] = value.split('|');
+const rolesFormatted: Map<string, Set<string>> = roles.split('\n').reduce((acc, curr) => {
+  const [first, last] = curr.split('|');
 
-  return { first, last };
-});
+  if (acc.has(first)) {
+    const valuesSet = acc.get(first);
+
+    if (!valuesSet) throw new Error('Set not found in reduce');
+
+    valuesSet.add(last);;
+    return acc;
+  }
+
+  acc.set(first, new Set([last]));
+  return acc;
+}, new Map<string, Set<string>>());
 
 const pageList: string[][] = pages.split('\n').map((value) => value.split(','));
 
@@ -19,13 +24,7 @@ function checkValidPosition(row: string[]): boolean {
   for (let index = 0; index < row.length; index++) {
     const page = row[index];
 
-    const lasts: Set<string> = rolesFormatted.reduce((acc, curr) => {
-      if (curr.first === page) {
-        acc.add(curr.last);
-      }
-
-      return acc;
-    }, new Set<string>());
+    const lasts: Set<string> = rolesFormatted.get(page) ?? new Set();
 
     const slicedRow = row.slice(index + 1);
   
