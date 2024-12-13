@@ -1,32 +1,5 @@
 const input = Deno.readTextFileSync('inputs/input05.txt');
 
-function shortArrayByRoles(row: string[]) {
-  let index = 1;
-  const arrayCopy = [...row];
-
-  while(true) {
-    if (index >= arrayCopy.length) {
-      index = 1;
-      continue;
-    }
-
-    const currItem = arrayCopy[index];
-    const prevItem = arrayCopy[index - 1];
-    const lasts: Set<string> = rolesFormatted.get(currItem) ?? new Set();
-
-    if (lasts.has(prevItem)) {
-      arrayCopy[index] = prevItem;
-      arrayCopy[index - 1] = currItem;
-    }
-
-    if (checkValidPosition(arrayCopy)) break;
-
-    index++;
-  }
-
-  return arrayCopy;
-}
-
 const [roles, pages] = input.split('\n\n');
 
 const rolesFormatted: Map<string, Set<string>> = roles.split('\n').reduce((acc, curr) => {
@@ -63,6 +36,33 @@ function checkValidPosition(row: string[]): boolean {
   }
 
   return true;
+}
+
+function shortArrayByRoles(row: string[]) {
+  let index = 1;
+  const arrayCopy = [...row];
+
+  while(true) {
+    if (index >= arrayCopy.length) {
+      index = 1;
+      continue;
+    }
+
+    const currItem = arrayCopy[index];
+    const prevItem = arrayCopy[index - 1];
+    const lasts: Set<string> = rolesFormatted.get(currItem) ?? new Set();
+
+    if (lasts.has(prevItem)) {
+      arrayCopy[index] = prevItem;
+      arrayCopy[index - 1] = currItem;
+    }
+
+    if (checkValidPosition(arrayCopy)) break;
+
+    index++;
+  }
+
+  return arrayCopy;
 }
 
 let sum = 0;
