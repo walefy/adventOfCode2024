@@ -19,18 +19,18 @@ function checkValidPosition(row: string[]): boolean {
   for (let index = 0; index < row.length; index++) {
     const page = row[index];
 
-    const lasts: string[] = rolesFormatted.reduce((acc, curr) => {
+    const lasts: Set<string> = rolesFormatted.reduce((acc, curr) => {
       if (curr.first === page) {
-        return [...acc, curr.last];
+        acc.add(curr.last);
       }
 
       return acc;
-    }, [] as string[]);
+    }, new Set<string>());
 
     const slicedRow = row.slice(index + 1);
   
     for (const item of slicedRow) {
-      if (!lasts.includes(item)) {
+      if (!lasts.has(item)) {
         return false;
       }
     }
