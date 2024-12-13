@@ -38,7 +38,7 @@ function checkValidPosition(row: string[]): boolean {
   return true;
 }
 
-function shortArrayByRoles(row: string[]) {
+function sortArrayByRoles(row: string[]) {
   let index = 1;
   const arrayCopy = [...row];
 
@@ -73,7 +73,7 @@ for (let index = 0; index < pageList.length; index++) {
   const validationLine = checkValidPosition(row);
 
   if (!validationLine) {
-    const shortedRow = shortArrayByRoles(row);
+    const shortedRow = sortArrayByRoles(row);
     const middleIndex = Math.floor(shortedRow.length / 2);
     sum += Number(shortedRow[middleIndex]);
   }
