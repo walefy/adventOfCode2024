@@ -52,3 +52,5 @@ for (let index = 0; index < pageList.length; index++) {
 }
 
 console.log(sum);
+
+// algorítimo lento e ruim mas funciona XD
