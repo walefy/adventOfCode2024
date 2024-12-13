@@ -10,7 +10,7 @@ const rolesFormatted: Map<string, Set<string>> = roles.split('\n').reduce((acc, 
 
     if (!valuesSet) throw new Error('Set not found in reduce');
 
-    valuesSet.add(last);;
+    valuesSet.add(last);
     return acc;
   }
 
